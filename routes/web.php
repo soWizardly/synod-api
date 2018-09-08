@@ -12,5 +12,18 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return "hi";
+    #return $router->app->version();
 });
+
+$router->group();
+
+$router->get('/users', "UserController@index");
+$router->get('/users/make', "UserController@store");
+$router->get('/users/{id}', "UserController@show");
+$router->get('/users/edit/{id}', "UserController@update");
+$router->get('/users/delete/{id}', "UserController@delete");
+
+
+$router->get('/projects', "ProjectController@index");
+$router->get('/proposals', "ProposalController@index");
