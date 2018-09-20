@@ -17,7 +17,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'type' => random_int(1,2),
         'password' => $faker->password . random_int(10000000,99999999),
-        'token' => "A" . bin2hex(random_bytes(20))
+        'api_token' => "A" . bin2hex(random_bytes(20))
     ];
 });
 

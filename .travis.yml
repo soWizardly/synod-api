@@ -1,0 +1,14 @@
+language: php
+php:
+  - 7.0
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE homestead;'
+  - travis_retry composer global require hirak/prestissimo
+install:
+  - "composer install"
+script:
+  - "mv ./.env.example ./.env"
+  - "php artisan migrate --seed"
+  - "vendor/bin/phpunit"
