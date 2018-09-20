@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            abort(400, 'Bad User ID');
+            abort(400, trans('messages.user.id.notFound'));
         }
         return $user;
     }
@@ -27,23 +27,24 @@ class UserController extends Controller
             'name'     => 'required|unique:user',
             'email'    => 'required|unique:user',
             'password' => 'required|min:8',
+            'type'     => 'required|numeric'
         ]);
 
-        $user = (new User(array_only($request->all(), ["name", "email", "password"])));
+        $user = (new User(array_only($request->all(), ["name", "email", "password", "type"])));
         $user->save();
 
-        return $user;
+        return User::find($user->id);
     }
 
     public function update(Request $request, $id)
     {
         $user = User::find($id);
         if (!$user) {
-            abort(400, "Invalid User ID");
+            abort(400, trans('messages.user.id.notFound'));
         }
 
         $this->validate($request, [
-            'name'     => 'required|unique:user',
+            'name'     => "required|unique:user,id,{$id}",
             'email'    => 'required|unique:user',
             'password' => 'required|min:8',
         ]);
@@ -53,14 +54,14 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        return $user;
+        return User::find($user->id);
     }
 
     public function delete(Request $request, $id)
     {
         $user = User::find($id);
         if (!$user) {
-            abort(400, "Invalid User ID");
+            abort(400, trans('messages.user.id.notFound'));
         }
         $user->delete();
 

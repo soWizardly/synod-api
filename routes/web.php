@@ -12,18 +12,37 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "hi";
-    #return $router->app->version();
+    return $router->app->version();
 });
 
-$router->group();
+$router->post('login', 'SessionController@login');
+$router->post('logout', 'SessionController@logout');
 
-$router->get('/users', "UserController@index");
-$router->get('/users/make', "UserController@store");
-$router->get('/users/{id}', "UserController@show");
-$router->get('/users/edit/{id}', "UserController@update");
-$router->get('/users/delete/{id}', "UserController@delete");
+$router->group(["middleware" => "auth"], function () use ($router) {
 
+    $router->group(['prefix' => 'users'], function () use ($router) {
+        $router->get('', "UserController@index");
+        $router->post('/', "UserController@store");
+        $router->get('/{id}', "UserController@show");
+        $router->put('/{id}', "UserController@update");
+        $router->delete('/{id}', "UserController@delete");
+    });
 
-$router->get('/projects', "ProjectController@index");
-$router->get('/proposals', "ProposalController@index");
+    $router->group(['prefix' => 'projects'], function () use ($router) {
+        $router->get('', "ProjectController@index");
+        $router->post('/', "ProjectController@store");
+        $router->get('/{id}', "ProjectController@show");
+        $router->put('/{id}', "ProjectController@update");
+        $router->delete('/{id}', "ProjectController@delete");
+    });
+
+    $router->group(['prefix' => 'proposals'], function () use ($router) {
+        $router->get('', "ProposalController@index");
+        $router->post('/', "ProposalController@store");
+        $router->get('/{id}', "ProposalController@show");
+        $router->put('/{id}', "ProposalController@update");
+        $router->delete('/{id}', "ProposalController@delete");
+    });
+
+});
+
