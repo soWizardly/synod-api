@@ -5,6 +5,7 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE homestead;'
+  - travis_retry composer global require hirak/prestissimo
 install:
   - "composer install"
 script:
