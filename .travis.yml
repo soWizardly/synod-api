@@ -8,6 +8,6 @@ before_install:
 install:
   - "composer install"
 script:
-  - "php copy(__DIR__/.env.example, __DIR__/.env)"
+  - "mv ./.env.example ./.env"
   - "php artisan migrate --seed"
   - "vendor/bin/phpunit"
