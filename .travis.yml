@@ -1,6 +1,8 @@
 language: php
 php:
   - 7.0
+install:
+  - "composer install"
 script:
   - "php artisan migrate --seed"
   - "vendor/bin/phpunit"
