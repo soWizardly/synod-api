@@ -11,4 +11,9 @@ return [
             "notFound" => "Project ID not found"
         ]
     ],
+    "proposal" => [
+        "id" => [
+            "notFound" => "Proposal ID not found"
+        ]
+    ],
 ];

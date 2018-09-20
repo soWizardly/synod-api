@@ -18,7 +18,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            abort(400, 'Bad Project ID');
+            abort(400, trans('messages.project.id.notFound'));
         }
         return $project;
     }
@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
         $project = Project::find($id);
         if (!$project) {
-            abort(400, "Invalid User ID");
+            abort(400, trans('messages.project.id.notFound'));
         }
 
         $this->validate($request, [
@@ -63,7 +63,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         if (!$project) {
-            abort(400, "Invalid Project ID");
+            abort(400, trans('messages.project.id.notFound'));
         }
         $project->delete();
 
