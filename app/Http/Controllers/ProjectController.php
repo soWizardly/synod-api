@@ -28,7 +28,7 @@ class ProjectController extends Controller
 
         $this->validate($request, [
             'name'    => 'required|unique:project',
-            'content' => 'required|min:100',
+            'content' => 'required|min:10',
         ]);
 
         $data = array_merge(["user_id" => Auth::id()], array_only($request->all(), ["name", "content"]));
