@@ -1,0 +1,4 @@
+language: php
+script:
+  - "php artisan migrate --seed"
+  - "vendor/bin/phpunit"
