@@ -16,4 +16,7 @@ return [
             "notFound" => "Proposal ID not found"
         ]
     ],
+    "login" => [
+        "fail" => "Invalid user name and/or password"
+    ]
 ];
