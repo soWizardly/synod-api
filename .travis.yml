@@ -1,8 +1,13 @@
 language: php
 php:
   - 7.0
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE homestead;'
 install:
   - "composer install"
 script:
+  - "php copy(__DIR__/.env.example, __DIR__/.env)"
   - "php artisan migrate --seed"
   - "vendor/bin/phpunit"
