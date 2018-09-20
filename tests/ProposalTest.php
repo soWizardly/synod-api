@@ -21,7 +21,7 @@ class ProposalTest extends TestCase
             "project_id" => $projectId
         ])->toArray();
 
-        $this->post('proposals', $proposal);
+        $this->post('proposals', $proposal)->assertResponseOk();
 
         $this->seeInDatabase('proposal', [
             "user_id"    => $proposal["user_id"],

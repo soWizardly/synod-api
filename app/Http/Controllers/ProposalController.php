@@ -18,7 +18,7 @@ class ProposalController extends Controller
     {
         $proposal = Proposal::find($id);
         if (!$proposal) {
-            abort(400, 'Bad Proposal ID');
+            abort(400, trans('messages.proposal.id.notFound'));
         }
         return $proposal;
     }
@@ -47,7 +47,7 @@ class ProposalController extends Controller
 
         $proposal = Proposal::find($id);
         if (!$proposal) {
-            abort(400, "Invalid Proposal ID");
+            abort(400, trans('messages.proposal.id.notFound'));
         }
 
         $this->validate($request, [
@@ -68,7 +68,7 @@ class ProposalController extends Controller
     {
         $proposal = Proposal::find($id);
         if (!$proposal) {
-            abort(400, "Invalid User ID");
+            abort(400, trans('messages.proposal.id.notFound'));
         }
         $proposal->delete();
 
