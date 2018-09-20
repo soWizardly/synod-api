@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 class SessionController extends Controller
 {
     public function login(Request $request) {
+
         $this->validate($request, [
             'name' => 'required|exists:user',
             'password' => 'required',
         ]);
-        return ["api_token" => (new User)->where("name", $request->name)->first()->api_token];
+
+        $user = (new User)->where("name", $request->name)->where("password", $request->password)->first();
+        if (!$user) {
+            abort(401, trans("login.fail"));
+        }
+
+        return ["api_token" => $user->apiToken];
+
     }
 
     public function logout() {
