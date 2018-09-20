@@ -11,11 +11,9 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable;
 
-    protected $table = "user";
-    protected $fillable = ['id', 'name', 'email', 'password', 'type', 'created_at', 'updated_at'];
-    protected $hidden = [
-        'password', 'token'
-    ];
+    protected $table    = "user";
+    protected $fillable = ['id', 'name', 'email', 'password', 'api_token', 'type', 'created_at', 'updated_at'];
+    protected $hidden   = ['password', 'api_token'];
 
     public function proposals()
     {
