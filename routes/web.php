@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 $router->post('login', 'SessionController@login');
 $router->post('logout', 'SessionController@logout');
 
-$router->group(["middleware" => "auth"], function () use ($router) {
+#$router->group(["middleware" => "auth"], function () use ($router) {
 
     $router->group(['prefix' => 'users'], function () use ($router) {
         $router->get('', "UserController@index");
@@ -44,5 +44,5 @@ $router->group(["middleware" => "auth"], function () use ($router) {
         $router->delete('/{id}', "ProposalController@delete");
     });
 
-});
+#});
 
